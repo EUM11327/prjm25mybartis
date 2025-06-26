@@ -18,11 +18,28 @@
 		{PARAM3},SYSDATE,0,REPLYBOARD_SEQ.CURRVAL,0,0)
 	</insert>
 
-	<select id="contentView">
+	<select id="contentView" resultType="com.tech.prjm09.dto.BDto">
 		SELECT BID,BNAME,BTITLE,BCONTENT,
 		BDATE,BHIT,BGROUP,BSTEP,BINDENT
 		FROM
 		REPLYBOARD WHERE BID=#{PARAM1}
 	</select>
+	
+	<insert id="reply">
+		INSERT INTO REPLYBOARD(BID,BNAME,BTITLE, 
+		BCONTENT,BGROUP,BSTEP,BINDENT)
+		VALUES(REPLYBOARD_SEQ.NEXTVAL,#{PARAM2},
+		#{PARAM3},#{PARAM4},#{PARAM5},#{PARAM6}+1,#{PARAM7}+1)
+	</insert>
+	
+	<update id="replyShape">
+		UPDATE REPLYBOARD SET BSTEP=BSTEP+1
+		WHERE BGROUP=#{PARAM1} AND BSTEP>#{PARAM2}
+	
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM REPLYBOARD WHERE BID=#{PARAM1}
+	</delete>
 
 </mapper>

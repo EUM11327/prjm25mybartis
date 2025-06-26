@@ -123,9 +123,19 @@ public class BController {
 	@PostMapping("/reply")
 	public String reply(HttpServletRequest request, Model model) {
 		System.out.println("reply() ctr");
-		model.addAttribute("request", request);
-		command = new BReplyCommand();
-		command.execute(model);
+//		model.addAttribute("request", request);
+//		command = new BReplyCommand();
+//		command.execute(model);
+		
+		String bid=request.getParameter("bid");
+		String bname=request.getParameter("bname");
+		String btitle=request.getParameter("btitle");
+		String bcontent=request.getParameter("bcontent");
+		String bgroup=request.getParameter("bgroup");
+		String bstep=request.getParameter("bstep");
+		String bindent=request.getParameter("bindent");
+		iDao.replyShape(bgroup, bstep);
+		iDao.reply(bid, bname, btitle, bcontent, bgroup, bstep, bindent);
 
 		return "redirect:list";
 	}
@@ -133,9 +143,12 @@ public class BController {
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
 		System.out.println("delete() ctr");
-		model.addAttribute("request", request);
-		command = new BDeleteCommand();
-		command.execute(model);
+//		model.addAttribute("request", request);
+//		command = new BDeleteCommand();
+//		command.execute(model);
+		
+		String bid=request.getParameter("bid");
+		iDao.delete(bid);
 
 		return "redirect:list";
 	}
