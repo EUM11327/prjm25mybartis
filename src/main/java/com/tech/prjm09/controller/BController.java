@@ -65,6 +65,7 @@ public class BController {
 		String btitle = request.getParameter("btitle");
 		String bcontent = request.getParameter("bcontent");
 		iDao.write(bname, btitle, bcontent);
+		model.addAttribute("request",request);
 		return "redirect:list";
 	}
 
@@ -78,10 +79,6 @@ public class BController {
 		String bid = request.getParameter("bid");
 		BDto dto = iDao.contentView(bid);
 		model.addAttribute("content_view", dto);
-
-		model.addAttribute("request", request);
-		command = new BContentCommand();
-		command.execute(model);
 
 		return "content_view";
 	}
@@ -116,6 +113,7 @@ public class BController {
 		model.addAttribute("request", request);
 		command = new BReplyViewCommand();
 		command.execute(model);
+		
 
 		return "reply_view";
 	}
