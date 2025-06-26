@@ -61,51 +61,38 @@ public class BController {
 //		model.addAttribute("request",request);
 //		command=new BWriteCommand();
 //		command.execute(model);
-<<<<<<< feat/hs2
-		
-		String bname=request.getParameter("bname");
-		String btitle=request.getParameter("btitle");
-		String bcontent=request.getParameter("bcontent");
-		iDao.write(bname, btitle, bcontent);
-		
-		
-=======
-
 		String bname = request.getParameter("bname");
 		String btitle = request.getParameter("btitle");
 		String bcontent = request.getParameter("bcontent");
 		iDao.write(bname, btitle, bcontent);
->>>>>>> dev
+		model.addAttribute("request",request);
 		return "redirect:list";
 	}
 
 	@RequestMapping("/content_view")
 	public String content_view(HttpServletRequest request, Model model) {
 		System.out.println("content_view() ctr");
-<<<<<<< feat/hs2
 //		model.addAttribute("request",request);
 //		command=new BContentCommand();
 //		command.execute(model);
-		
-		String bid=request.getParameter("bid");
-		BDto dto=iDao.contentView(bid);
-		model.addAttribute("content_view",dto);
-		
-=======
-		model.addAttribute("request", request);
-		command = new BContentCommand();
-		command.execute(model);
 
->>>>>>> dev
+		String bid = request.getParameter("bid");
+		BDto dto = iDao.contentView(bid);
+		model.addAttribute("content_view", dto);
+
 		return "content_view";
 	}
 
 	@RequestMapping("/modify_view")
 	public String modify_view(HttpServletRequest request, Model model) {
 		System.out.println("modify_view() ctr");
-		model.addAttribute("request", request);
-		command = new BModifyViewCommand();
-		command.execute(model);
+//		model.addAttribute("request", request);
+//		command = new BModifyViewCommand();
+//		command.execute(model);
+		String bid = request.getParameter("bid");
+		BDto dto = iDao.modifyView(bid);
+		model.addAttribute("content_view", dto);
+
 		return "modify_view";
 	}
 
@@ -126,6 +113,7 @@ public class BController {
 		model.addAttribute("request", request);
 		command = new BReplyViewCommand();
 		command.execute(model);
+		
 
 		return "reply_view";
 	}
@@ -133,9 +121,19 @@ public class BController {
 	@PostMapping("/reply")
 	public String reply(HttpServletRequest request, Model model) {
 		System.out.println("reply() ctr");
-		model.addAttribute("request", request);
-		command = new BReplyCommand();
-		command.execute(model);
+//		model.addAttribute("request", request);
+//		command = new BReplyCommand();
+//		command.execute(model);
+		
+		String bid=request.getParameter("bid");
+		String bname=request.getParameter("bname");
+		String btitle=request.getParameter("btitle");
+		String bcontent=request.getParameter("bcontent");
+		String bgroup=request.getParameter("bgroup");
+		String bstep=request.getParameter("bstep");
+		String bindent=request.getParameter("bindent");
+		iDao.replyShape(bgroup, bstep);
+		iDao.reply(bid, bname, btitle, bcontent, bgroup, bstep, bindent);
 
 		return "redirect:list";
 	}
@@ -143,9 +141,12 @@ public class BController {
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request, Model model) {
 		System.out.println("delete() ctr");
-		model.addAttribute("request", request);
-		command = new BDeleteCommand();
-		command.execute(model);
+//		model.addAttribute("request", request);
+//		command = new BDeleteCommand();
+//		command.execute(model);
+		
+		String bid=request.getParameter("bid");
+		iDao.delete(bid);
 
 		return "redirect:list";
 	}
