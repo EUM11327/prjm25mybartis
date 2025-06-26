@@ -61,21 +61,42 @@ public class BController {
 //		model.addAttribute("request",request);
 //		command=new BWriteCommand();
 //		command.execute(model);
+<<<<<<< feat/hs2
+		
+		String bname=request.getParameter("bname");
+		String btitle=request.getParameter("btitle");
+		String bcontent=request.getParameter("bcontent");
+		iDao.write(bname, btitle, bcontent);
+		
+		
+=======
 
 		String bname = request.getParameter("bname");
 		String btitle = request.getParameter("btitle");
 		String bcontent = request.getParameter("bcontent");
 		iDao.write(bname, btitle, bcontent);
+>>>>>>> dev
 		return "redirect:list";
 	}
 
 	@RequestMapping("/content_view")
 	public String content_view(HttpServletRequest request, Model model) {
 		System.out.println("content_view() ctr");
+<<<<<<< feat/hs2
+//		model.addAttribute("request",request);
+//		command=new BContentCommand();
+//		command.execute(model);
+		
+		String bid=request.getParameter("bid");
+		BDto dto=iDao.contentView(bid);
+		model.addAttribute("content_view",dto);
+		
+=======
 		model.addAttribute("request", request);
 		command = new BContentCommand();
 		command.execute(model);
 
+>>>>>>> dev
 		return "content_view";
 	}
 
