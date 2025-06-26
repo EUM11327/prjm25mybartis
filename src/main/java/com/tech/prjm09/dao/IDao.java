@@ -9,13 +9,11 @@ import com.tech.prjm09.dto.BDto;
 @Mapper
 public interface IDao {
 	public ArrayList<BDto> list();
-<<<<<<< feat/hs2
+
 	public void write(String bname, String btitle,
 			String bcontent);
 	
 	public BDto contentView(String sbid);
-=======
-
-	public void write(String bname, String btitle, String bcontent);
->>>>>>> dev
+	public BDto modifyView(String sbid);
 }
+
