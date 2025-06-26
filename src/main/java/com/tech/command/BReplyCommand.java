@@ -27,6 +27,7 @@ public class BReplyCommand implements BCommand{
 		String bindent=request.getParameter("bindent");
 		
 		
+		
 		BDao dao=new BDao();
 		dao.reply(bid,bname,btitle,bcontent
 				,bgroup,bstep,bindent);
